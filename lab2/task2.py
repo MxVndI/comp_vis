@@ -4,10 +4,10 @@ import numpy as np
 video = cv2.VideoCapture(0)
 ok, img = video.read()
 cv2.namedWindow('Camera', cv2.WINDOW_AUTOSIZE)
-lower_red1 = np.array([0, 120, 70])
-upper_red1 = np.array([10, 255, 255])
-lower_red2 = np.array([170, 120, 70])
-upper_red2 = np.array([180, 255, 255])
+low_redor = np.array([0, 120, 70])
+up_redor = np.array([10, 255, 255])
+low_redpur = np.array([170, 120, 70])
+up_redpur = np.array([180, 255, 255])
 
 while (True):
     ok, img = video.read()

@@ -6,7 +6,7 @@ import java.io.File;
 
 public class Main {
     public static void main(String[] args) throws Exception {
-        BufferedImage colorImage = ImageIO.read(new File("va.png"));
+        BufferedImage colorImage = ImageIO.read(new File("../va.png"));
         BufferedImage grayImage = toGrayScale(colorImage);
         double[][] matrix = imageToMatrix(grayImage);
         double[][] kernel = normalizedKernel(0,0,9, 9, 50.0);

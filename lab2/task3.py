@@ -14,11 +14,18 @@ kernel = np.ones((5, 5), np.uint8)
 while (True):
     ok, img = video.read()
 
-    hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)  # COLOR_BGR2RGB, COLOR_BGR2RGB
+    hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
     redor_maska = cv2.inRange(hsv, low_redor, up_redor)
     redpur_maska = cv2.inRange(hsv, low_redpur, up_redpur)
     red_maska = cv2.bitwise_or(redor_maska, redpur_maska)
     hsv_red_result = cv2.bitwise_and(img, img, mask=red_maska)
+
+    salt_mask_white = np.random.random(img.shape[:2]) < 0.1
+    img[salt_mask_white] = 255
+    salt_mask_black = np.random.random(img.shape[:2]) < 0.1
+    img[salt_mask_black] = 0
+
+    cv2.imshow('Salt', img)
 
     opening_img = cv2.morphologyEx(hsv_red_result, cv2.MORPH_OPEN, kernel)
 
@@ -29,8 +36,8 @@ while (True):
 
     cv2.imshow('Close', closing_img)
     cv2.imshow('Open', opening_img)
-    cv2.imshow('Dila', dilated_img)
-    cv2.imshow('Ero', eroded_img)
+    cv2.imshow('Dilated', dilated_img)
+    cv2.imshow('Eroded', eroded_img)
 
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break

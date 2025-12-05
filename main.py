@@ -123,9 +123,9 @@ if cap.isOpened():
         b, g, r = center_pixel[0], center_pixel[1], center_pixel[2]
 
         distances = [
-            abs(r - 255) + abs(g - 0) + abs(b - 0),
-            abs(r - 0) + abs(g - 255) + abs(b - 0),
-            abs(r - 0) + abs(g - 0) + abs(b - 255),
+            abs(int(r) - 255) + abs(int(g) - 0) + abs(int(b) - 0),
+            abs(int(r) - 0) + abs(int(g) - 255) + abs(int(b) - 0),
+            abs(int(r) - 0) + abs(int(g) - 0) + abs(int(b) - 255),
         ]
 
         idx = distances.index(min(distances))
@@ -158,8 +158,7 @@ if cap.isOpened():
 cv2.destroyAllWindows()
 
 
-camera_url = "http://192.168.0.125:8080/video"
-cap = cv2.VideoCapture(camera_url)
+cap = cv2.VideoCapture(1)
 if cap.isOpened():
     while True:
         ret, frame = cap.read()

@@ -11,9 +11,11 @@ def create_gaussian_kernel(size, sigma):
         for j in range(size):
             x = i - center
             y = j - center
-            kernel[i, j] = np.exp(-(x ** 2 + y ** 2) / (2 * sigma ** 2))
+            kernel[i, j] = 1/(2*3.14 * sigma**2) * np.exp(-(x ** 2 + y ** 2) / (2 * sigma ** 2))
+            # print(kernel)
+            print(np.sum(kernel))
 
-    kernel = kernel / np.sum(kernel)
+    # kernel = kernel / np.sum(kernel)
     return kernel
 
 
@@ -33,11 +35,11 @@ def apply_gaussian_filter(image, kernel):
 
 
 def main_custom():
-    image = cv2.imread('va.png')
+    image = cv2.imread('../va.png')
     gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
-    kernel_size = 9
-    sigma = 50.0
+    kernel_size = 7
+    sigma = 3
     kernel = create_gaussian_kernel(kernel_size, sigma)
 
     filtered_image = apply_gaussian_filter(gray_image, kernel)
