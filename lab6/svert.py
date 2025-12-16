@@ -3,6 +3,7 @@ from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Flatten, Conv2D, MaxPooling2D, Dropout
 from tensorflow.keras.datasets import mnist
 from tensorflow.keras.utils import to_categorical
+import matplotlib.pyplot as plt
 
 (x_train, y_train), (x_test, y_test) = mnist.load_data()
 
@@ -37,3 +38,19 @@ cnn_model.fit(x_train_cnn, y_train,
 
 test_loss, test_acc = cnn_model.evaluate(x_test_cnn, y_test)
 print(f"CNN Test accuracy: {test_acc:.4f}")
+
+cnn_model.save("mnist_cnn_model.keras")
+print("Модель сохранена в файл mnist_cnn_model.keras")
+
+# Загрузка данных MNIST
+(x_train, y_train), (x_test, y_test) = mnist.load_data()
+
+# Покажем первые 9 изображений
+plt.figure(figsize=(6,6))
+for i in range(9):
+    plt.subplot(3,3,i+1)
+    plt.imshow(x_train[i], cmap='gray')  # grayscale
+    plt.title(f"Label: {y_train[i]}")
+    plt.axis('off')
+plt.tight_layout()
+plt.show()
